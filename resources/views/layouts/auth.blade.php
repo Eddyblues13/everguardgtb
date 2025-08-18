@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>{{ $settings->site_name }} - @yield('title')</title>
     <meta charset="UTF-8">
@@ -8,9 +9,10 @@
     <meta name="robots" content="index, follow">
     <meta name="apple-mobile-web-app-title" content="{{$settings->site_name}}">
     <meta name="application-name" content="{{$settings->site_name}}">
-    <meta name="description" content="Swift and Secure Money Transfer to any UK bank account will become a breeze with {{$settings->site_name}}.">
+    <meta name="description"
+        content="Swift and Secure Money Transfer to any UK bank account will become a breeze with {{$settings->site_name}}.">
     <link rel="shortcut icon" href="{{ asset('storage/app/public/' . $settings->favicon) }}">
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -60,18 +62,18 @@
             }
         }
     </script>
-    
+
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
-    
+
     <!-- CSS Variables -->
     <script>
         // Set CSS theme variables
@@ -85,13 +87,15 @@
         document.documentElement.style.setProperty('--bg-color', '{{ isset($appearanceSettings) ? $appearanceSettings->bg_color : "#f9fafb" }}');
         document.documentElement.style.setProperty('--card-bg-color', '{{ isset($appearanceSettings) ? $appearanceSettings->card_bg_color : "#ffffff" }}');
     </script>
-    
+
     @if(isset($appearanceSettings) && $appearanceSettings->custom_css)
     <style>
-        {!! $appearanceSettings->custom_css !!}
+        {
+             ! ! $appearanceSettings->custom_css  ! !
+        }
     </style>
     @endif
-    
+
     <!-- Animated Loading Screen -->
     <style>
         .page-loading {
@@ -107,10 +111,12 @@
             visibility: hidden;
             z-index: 9999;
         }
+
         .page-loading.active {
             opacity: 1;
             visibility: visible;
         }
+
         .page-loading-inner {
             position: absolute;
             top: 50%;
@@ -121,17 +127,18 @@
             transition: opacity .2s ease-in-out;
             opacity: 0;
         }
+
         .page-loading.active>.page-loading-inner {
             opacity: 1;
         }
-        
+
         .loader {
             position: relative;
             width: 120px;
             height: 120px;
             margin: 0 auto 30px;
         }
-        
+
         .loader-circle {
             position: absolute;
             width: 100%;
@@ -141,13 +148,13 @@
             border-top-color: var(--primary-color);
             animation: spin 2s linear infinite;
         }
-        
+
         .loader-circle:nth-child(2) {
             border-top-color: transparent;
             border-right-color: var(--primary-color);
             animation: spin 3s linear infinite;
         }
-        
+
         .loader-circle:nth-child(3) {
             width: 80%;
             height: 80%;
@@ -157,7 +164,7 @@
             border-left-color: var(--primary-color-light);
             animation: spin 1.5s linear infinite reverse;
         }
-        
+
         .loader-logo {
             position: absolute;
             top: 50%;
@@ -172,7 +179,7 @@
             justify-content: center;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .loader-progress {
             position: relative;
             width: 200px;
@@ -182,7 +189,7 @@
             margin: 10px auto;
             overflow: hidden;
         }
-        
+
         .loader-progress-bar {
             position: absolute;
             top: 0;
@@ -193,18 +200,32 @@
             border-radius: 2px;
             animation: progress 2s ease-in-out infinite;
         }
-        
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
-        
+
         @keyframes progress {
-            0% { width: 0%; }
-            50% { width: 100%; }
-            100% { width: 0%; left: 100%; }
+            0% {
+                width: 0%;
+            }
+
+            50% {
+                width: 100%;
+            }
+
+            100% {
+                width: 0%;
+                left: 100%;
+            }
         }
-        
+
         /* Numeric keypad styles */
         .keypad {
             display: grid;
@@ -214,7 +235,7 @@
             max-width: 300px;
             margin: 0 auto;
         }
-        
+
         .key {
             aspect-ratio: 1/1;
             display: flex;
@@ -227,18 +248,18 @@
             transition: all 0.2s;
             user-select: none;
         }
-        
+
         .key:active {
             transform: scale(0.95);
         }
-        
+
         .pin-display {
             display: flex;
             gap: 10px;
             justify-content: center;
             margin-bottom: 20px;
         }
-        
+
         .pin-digit {
             width: 16px;
             height: 16px;
@@ -246,11 +267,11 @@
             background-color: #e5e7eb;
             transition: all 0.2s;
         }
-        
+
         .pin-digit.active {
             background-color: var(--primary-color);
         }
-        
+
         /* 3D button effect */
         .btn-3d {
             position: relative;
@@ -258,15 +279,15 @@
             transform-style: preserve-3d;
             transform: perspective(800px) translateZ(0);
         }
-        
+
         .btn-3d:hover {
             transform: perspective(800px) translateZ(10px);
         }
-        
+
         .btn-3d:active {
             transform: perspective(800px) translateZ(2px);
         }
-        
+
         .btn-3d::before {
             content: '';
             position: absolute;
@@ -279,13 +300,26 @@
             border-bottom-right-radius: inherit;
             transition: all 0.2s;
         }
-        
+
         .btn-3d:active::before {
             height: 2px;
             bottom: -2px;
         }
     </style>
     @laravelPWA
+
+    <!-- Smartsupp Live Chat script -->
+    <script type="text/javascript">
+        var _smartsupp = _smartsupp || {};
+_smartsupp.key = '52146ae80e1279b1d217e7ddbb88fb0370bf8ee5';
+window.smartsupp||(function(d) {
+  var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+  s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+  c.type='text/javascript';c.charset='utf-8';c.async=true;
+  c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+})(document);
+    </script>
+    <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
 </head>
 
 <body class="font-sans bg-gray-50 text-gray-900">
@@ -316,10 +350,11 @@
                 @yield('content')
             </div>
         </main>
-        
+
         <footer class="py-4 bg-white border-t border-gray-200">
             <div class="container mx-auto px-4 text-center">
-                <p class="text-sm text-gray-600">&copy; {{ date('Y') }} {{ $settings->site_name }}. All rights reserved.</p>
+                <p class="text-sm text-gray-600">&copy; {{ date('Y') }} {{ $settings->site_name }}. All rights reserved.
+                </p>
                 <div class="mt-2 flex justify-center space-x-4">
                     <a href="#" class="text-xs text-gray-500 hover:text-primary-600">Privacy Policy</a>
                     <a href="#" class="text-xs text-gray-500 hover:text-primary-600">Terms of Service</a>
@@ -333,7 +368,7 @@
     <script>
         lucide.createIcons();
     </script>
-    
+
     <!-- Enhanced Page Loading Animation -->
     <script>
         window.onload = function() {
@@ -348,8 +383,9 @@
             }, 800);
         };
     </script>
-    
-    
+
+
     @yield('scripts')
 </body>
+
 </html>
